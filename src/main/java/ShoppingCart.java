@@ -68,6 +68,16 @@ public class ShoppingCart {
         this.promotionRules.add(promotionRule);
     }
 
+    /**
+     * Loop through each rule and apply discount if all rule conditions are met.
+     * <p>
+     * Rule conditions are <em>fromDate</em>, <em>toDate</em>, <em>userGroup</em>, <em>color&subTotal</em>, <em>discount</em>
+     * <ul>Discount is apply if:
+     *      <li>current timestamp is valid (fromDate < and < toDate) and user group is same with rule group</li>
+     *      <li>or if total price of products having same color with rule color is greater than subtotal.</li>
+     * </ul>
+     * @return total discount amount or 0 if no rule is apply
+     */
     public long getTotalDiscount(){
         long totalDiscount = 0L;
         long currentTimeStamp = System.currentTimeMillis();
@@ -75,9 +85,12 @@ public class ShoppingCart {
             return totalDiscount;
 
         for (PromotionRule rule: this.promotionRules){
+            /*check conditions*/
             if((rule.getFromDate() <= currentTimeStamp)
                     && (currentTimeStamp <= rule.getToDate())
                     && user.getUserGroup().equals(rule.getUserGroup())) {
+
+                /*color and subtotal case*/
                 if(Objects.nonNull(rule.getColor()) && rule.getSubTotal() > 0) {
                     long productColorPrice = 0;
                     for(ProductWithQuantity productQuantity: this.listProductWithQuantity) {
@@ -97,6 +110,10 @@ public class ShoppingCart {
         return totalDiscount;
     }
 
+    /**
+     * Return total price of products without any discount
+     * @return long value or 0 if there is no product in cart
+     */
     public long getTotalPrice() {
         long totalPrice = 0L;
         for(ProductWithQuantity productQuantity: this.listProductWithQuantity) {
@@ -105,6 +122,10 @@ public class ShoppingCart {
         return totalPrice;
     }
 
+    /**
+     * Return total price of products after discount
+     * @return long value
+     */
     public long getTotalPriceToPay() {
         return getTotalPrice() - getTotalDiscount();
     }

@@ -2,6 +2,7 @@ import java.util.Objects;
 
 /**
  * @author huanpc (07/2018)
+ * Product object class
  */
 public class Product {
     private String id;

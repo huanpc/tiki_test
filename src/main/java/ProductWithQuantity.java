@@ -2,6 +2,7 @@ import java.util.Objects;
 
 /**
  * @author huanpc (07/2018)
+ * Define a object class which contains specific product with its quanity in shopping cart
  */
 public class ProductWithQuantity {
     private int quantity;
