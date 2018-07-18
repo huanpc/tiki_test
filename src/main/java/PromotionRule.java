@@ -1,5 +1,6 @@
 /**
  * @author huanpc (07/2018)
+ * Define a promotion rule to consider when applying a discount
  */
 public class PromotionRule {
     private long fromDate;

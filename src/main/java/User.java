@@ -1,5 +1,6 @@
 /**
  * @author huanpc (07/2018)
+ * User detail
  */
 public class User {
     private String name;

@@ -4,6 +4,7 @@ import java.util.Objects;
 
 /**
  * @author huanpc (07/2018)
+ * A shopping cart associated with specific user
  */
 public class ShoppingCart {
     private List<ProductWithQuantity> listProductWithQuantity;
