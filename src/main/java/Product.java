@@ -1,3 +1,5 @@
+import java.io.InvalidObjectException;
+import java.security.InvalidParameterException;
 import java.util.Objects;
 
 /**
@@ -10,7 +12,11 @@ public class Product {
     private String color;
     private long price;
 
-    public Product(String id, String name, String color, long price) {
+    public Product(String id, String name, String color, long price) throws IllegalArgumentException {
+        if(Objects.isNull(id) || id.equals("") || Objects.isNull(name) || name.equals(""))
+            throw new IllegalArgumentException("id or name is empty");
+        if(price < 0)
+            throw new IllegalArgumentException("price value is invalid ( must > 0)");
         this.id = id;
         this.name = name;
         this.color = color;
@@ -21,7 +27,9 @@ public class Product {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name) throws IllegalArgumentException {
+        if(Objects.isNull(name) || name.equals(""))
+            throw new IllegalArgumentException("name is empty");
         this.name = name;
     }
 
@@ -37,7 +45,9 @@ public class Product {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(long price) throws IllegalArgumentException {
+        if(price < 0)
+            throw new IllegalArgumentException("price value is invalid ( must > 0)");
         this.price = price;
     }
 
@@ -45,7 +55,9 @@ public class Product {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(String id) throws IllegalArgumentException {
+        if(Objects.isNull(id) || id.equals(""))
+            throw new IllegalArgumentException("id is empty");
         this.id = id;
     }
 

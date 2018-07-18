@@ -8,7 +8,9 @@ public class ProductWithQuantity {
     private int quantity;
     private Product product;
 
-    public ProductWithQuantity(int quantity, Product product) {
+    public ProductWithQuantity(int quantity, Product product) throws IllegalArgumentException{
+        if(quantity < 0)
+            throw new IllegalArgumentException("product's quantity must be greater than 0");
         this.quantity = quantity;
         this.product = product;
     }

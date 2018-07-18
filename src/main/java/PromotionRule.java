@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * @author huanpc (07/2018)
  * Define a promotion rule to consider when applying a discount
@@ -10,7 +12,10 @@ public class PromotionRule {
     private long discount;
     private UserGroup userGroup;
 
-    public PromotionRule(long fromDate, long toDate, String color, long subTotal, long discount, UserGroup userGroup) {
+    public PromotionRule(long fromDate, long toDate, String color, long subTotal, long discount, UserGroup userGroup)
+            throws IllegalArgumentException{
+        if(fromDate < 0 || toDate < 0 || fromDate > toDate || discount < 0 || subTotal < 0)
+            throw new IllegalArgumentException("either fromDate or toDate or discount or subTotal value is invalid");
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.color = color;

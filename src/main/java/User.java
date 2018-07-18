@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * @author huanpc (07/2018)
  * User detail
@@ -13,7 +15,9 @@ public class User {
         this.shoppingCart.setUser(this);
     }
 
-    public User(String name, String email, UserGroup userGroup) {
+    public User(String name, String email, UserGroup userGroup) throws IllegalArgumentException{
+        if(Objects.isNull(name) || name.equals("") || Objects.isNull(userGroup))
+            throw new IllegalArgumentException("name or user group is empty");
         this.name = name;
         this.email = email;
         this.userGroup = userGroup;
@@ -26,6 +30,8 @@ public class User {
     }
 
     public void setName(String name) {
+        if(Objects.isNull(name) || name.equals(""))
+            throw new IllegalArgumentException("name is empty");
         this.name = name;
     }
 
@@ -42,6 +48,8 @@ public class User {
     }
 
     public void setUserGroup(UserGroup userGroup) {
+        if(Objects.isNull(userGroup))
+            throw new IllegalArgumentException("user group is empty");
         this.userGroup = userGroup;
     }
 
